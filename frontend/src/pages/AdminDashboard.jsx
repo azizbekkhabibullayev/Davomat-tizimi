@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { toast } from 'sonner';
-import { Users, BarChart3, UserPlus, LogOut, Settings, Camera } from 'lucide-react';
+import { Users, BarChart3, UserPlus, LogOut, Camera } from 'lucide-react';
 import UsersManagement from '@/components/UsersManagement';
 import AttendanceReports from '@/components/AttendanceReports';
 import DashboardStats from '@/components/DashboardStats';
