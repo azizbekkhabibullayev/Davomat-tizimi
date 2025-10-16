@@ -24,10 +24,10 @@ const LoginPage = () => {
     try {
       const response = await axios.post(`${API}/auth/login`, credentials);
       login(response.data.access_token, response.data.user);
-      toast.success('Login successful!');
+      toast.success('Kirish muvaffaqiyatli!');
       navigate(response.data.user.role === 'admin' ? '/admin' : '/dashboard');
     } catch (error) {
-      toast.error(error.response?.data?.detail || 'Login failed');
+      toast.error(error.response?.data?.detail || 'Kirish amalga oshmadi');
     } finally {
       setLoading(false);
     }
@@ -39,10 +39,10 @@ const LoginPage = () => {
     try {
       const response = await axios.post(`${API}/auth/face-login`, { face_image: faceImage });
       login(response.data.access_token, response.data.user);
-      toast.success('Face login successful!');
+      toast.success('Yuz orqali kirish muvaffaqiyatli!');
       navigate(response.data.user.role === 'admin' ? '/admin' : '/dashboard');
     } catch (error) {
-      toast.error(error.response?.data?.detail || 'Face login failed');
+      toast.error(error.response?.data?.detail || 'Yuz orqali kirish amalga oshmadi');
     } finally {
       setLoading(false);
       setShowWebcam(false);
@@ -56,21 +56,21 @@ const LoginPage = () => {
           <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-indigo-600 to-purple-600 rounded-2xl mb-4">
             <Camera className="w-8 h-8 text-white" />
           </div>
-          <h1 className="text-4xl font-bold text-gray-900 mb-2">Welcome Back</h1>
-          <p className="text-gray-600">Login to access your dashboard</p>
+          <h1 className="text-4xl font-bold text-gray-900 mb-2">Xush Kelibsiz</h1>
+          <p className="text-gray-600">Panelingizga kirish uchun tizimga kiring</p>
         </div>
 
         <div className="bg-white rounded-3xl shadow-xl p-8">
           <Tabs defaultValue="password" className="w-full">
             <TabsList className="grid w-full grid-cols-2 mb-6">
-              <TabsTrigger data-testid="tab-password-login" value="password">Password</TabsTrigger>
-              <TabsTrigger data-testid="tab-face-login" value="face">Face Login</TabsTrigger>
+              <TabsTrigger data-testid="tab-password-login" value="password">Parol</TabsTrigger>
+              <TabsTrigger data-testid="tab-face-login" value="face">Yuz Tanish</TabsTrigger>
             </TabsList>
 
             <TabsContent value="password">
               <form onSubmit={handlePasswordLogin} className="space-y-4">
                 <div>
-                  <Label htmlFor="username" className="text-gray-700">Username</Label>
+                  <Label htmlFor="username" className="text-gray-700">Foydalanuvchi nomi</Label>
                   <div className="relative mt-1">
                     <User className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
                     <Input
@@ -79,14 +79,14 @@ const LoginPage = () => {
                       type="text"
                       value={credentials.username}
                       onChange={(e) => setCredentials({ ...credentials, username: e.target.value })}
-                      placeholder="Enter username"
+                      placeholder="Foydalanuvchi nomini kiriting"
                       className="pl-10 h-12"
                       required
                     />
                   </div>
                 </div>
                 <div>
-                  <Label htmlFor="password" className="text-gray-700">Password</Label>
+                  <Label htmlFor="password" className="text-gray-700">Parol</Label>
                   <div className="relative mt-1">
                     <Lock className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
                     <Input
@@ -95,7 +95,7 @@ const LoginPage = () => {
                       type="password"
                       value={credentials.password}
                       onChange={(e) => setCredentials({ ...credentials, password: e.target.value })}
-                      placeholder="Enter password"
+                      placeholder="Parolni kiriting"
                       className="pl-10 h-12"
                       required
                     />
@@ -107,7 +107,7 @@ const LoginPage = () => {
                   disabled={loading}
                   className="w-full h-12 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white text-base"
                 >
-                  {loading ? 'Logging in...' : 'Login'}
+                  {loading ? 'Kirilmoqda...' : 'Kirish'}
                 </Button>
               </form>
             </TabsContent>
@@ -119,14 +119,14 @@ const LoginPage = () => {
                     <div className="w-24 h-24 bg-gradient-to-br from-indigo-100 to-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
                       <Camera className="w-12 h-12 text-indigo-600" />
                     </div>
-                    <h3 className="text-xl font-semibold text-gray-800 mb-2">Face Recognition Login</h3>
-                    <p className="text-gray-600 mb-6">Click below to start face recognition</p>
+                    <h3 className="text-xl font-semibold text-gray-800 mb-2">Yuz Tanish Orqali Kirish</h3>
+                    <p className="text-gray-600 mb-6">Yuz tanishni boshlash uchun pastga bosing</p>
                     <Button
                       data-testid="btn-start-face-login"
                       onClick={() => setShowWebcam(true)}
                       className="bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white px-8 h-12"
                     >
-                      Start Face Login
+                      Yuz Tanishni Boshlash
                     </Button>
                   </div>
                 ) : (
@@ -147,7 +147,7 @@ const LoginPage = () => {
               onClick={() => navigate('/')}
               className="text-gray-600 hover:text-indigo-600"
             >
-              Back to Home
+              Bosh sahifaga qaytish
             </Button>
           </div>
         </div>

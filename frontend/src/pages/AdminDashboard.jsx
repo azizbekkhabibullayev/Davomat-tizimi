@@ -18,7 +18,7 @@ const AdminDashboard = () => {
 
   const handleLogout = () => {
     logout();
-    toast.success('Logged out successfully');
+    toast.success('Tizimdan muvaffaqiyatli chiqdingiz');
     navigate('/');
   };
 
@@ -32,8 +32,8 @@ const AdminDashboard = () => {
                 <Camera className="w-6 h-6 text-white" />
               </div>
               <div>
-                <h1 className="text-2xl font-bold text-gray-800">Admin Dashboard</h1>
-                <p className="text-sm text-gray-600">Welcome, {user?.full_name}</p>
+                <h1 className="text-2xl font-bold text-gray-800">Administrator Paneli</h1>
+                <p className="text-sm text-gray-600">Xush kelibsiz, {user?.full_name}</p>
               </div>
             </div>
             <div className="flex items-center space-x-3">
@@ -43,7 +43,7 @@ const AdminDashboard = () => {
                 className="bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white"
               >
                 <UserPlus className="w-4 h-4 mr-2" />
-                Register User
+                Foydalanuvchi Qo'shish
               </Button>
               <Button
                 data-testid="btn-logout"
@@ -51,7 +51,7 @@ const AdminDashboard = () => {
                 variant="outline"
               >
                 <LogOut className="w-4 h-4 mr-2" />
-                Logout
+                Chiqish
               </Button>
             </div>
           </div>
@@ -63,15 +63,15 @@ const AdminDashboard = () => {
           <TabsList className="bg-white shadow-sm p-1 rounded-xl">
             <TabsTrigger data-testid="tab-dashboard" value="dashboard" className="rounded-lg">
               <BarChart3 className="w-4 h-4 mr-2" />
-              Dashboard
+              Bosh Panel
             </TabsTrigger>
             <TabsTrigger data-testid="tab-users" value="users" className="rounded-lg">
               <Users className="w-4 h-4 mr-2" />
-              Users
+              Foydalanuvchilar
             </TabsTrigger>
             <TabsTrigger data-testid="tab-reports" value="reports" className="rounded-lg">
               <BarChart3 className="w-4 h-4 mr-2" />
-              Reports
+              Hisobotlar
             </TabsTrigger>
           </TabsList>
 
