@@ -39,7 +39,7 @@ const UsersManagement = () => {
       setUsers(response.data);
       setFilteredUsers(response.data);
     } catch (error) {
-      toast.error('Failed to fetch users');
+      toast.error('Foydalanuvchilarni yuklashda xatolik');
     } finally {
       setLoading(false);
     }
@@ -48,10 +48,10 @@ const UsersManagement = () => {
   const handleDeleteUser = async () => {
     try {
       await axios.delete(`${API}/users/${deleteUserId}`);
-      toast.success('User deleted successfully');
+      toast.success('Foydalanuvchi muvaffaqiyatli o\'chirildi');
       fetchUsers();
     } catch (error) {
-      toast.error('Failed to delete user');
+      toast.error('Foydalanuvchini o\'chirishda xatolik');
     } finally {
       setDeleteUserId(null);
     }
@@ -69,12 +69,12 @@ const UsersManagement = () => {
     <div className="space-y-6">
       <Card className="p-6 bg-white rounded-2xl shadow-sm">
         <div className="flex items-center justify-between mb-6">
-          <h2 className="text-2xl font-bold text-gray-800">Users Management</h2>
+          <h2 className="text-2xl font-bold text-gray-800">Foydalanuvchilar Boshqaruvi</h2>
           <div className="relative w-64">
             <Search className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
             <Input
               data-testid="input-search-users"
-              placeholder="Search users..."
+              placeholder="Foydalanuvchilarni qidirish..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               className="pl-10 h-11"
@@ -86,18 +86,18 @@ const UsersManagement = () => {
           <table className="w-full">
             <thead>
               <tr className="border-b">
-                <th className="text-left py-3 px-4 text-sm font-semibold text-gray-700">User</th>
+                <th className="text-left py-3 px-4 text-sm font-semibold text-gray-700">Foydalanuvchi</th>
                 <th className="text-left py-3 px-4 text-sm font-semibold text-gray-700">Email</th>
-                <th className="text-left py-3 px-4 text-sm font-semibold text-gray-700">Role</th>
-                <th className="text-left py-3 px-4 text-sm font-semibold text-gray-700">Face Registered</th>
-                <th className="text-right py-3 px-4 text-sm font-semibold text-gray-700">Actions</th>
+                <th className="text-left py-3 px-4 text-sm font-semibold text-gray-700">Rol</th>
+                <th className="text-left py-3 px-4 text-sm font-semibold text-gray-700">Yuz Ro'yxatdan O'tgan</th>
+                <th className="text-right py-3 px-4 text-sm font-semibold text-gray-700">Harakatlar</th>
               </tr>
             </thead>
             <tbody>
               {filteredUsers.length === 0 ? (
                 <tr>
                   <td colSpan="5" className="text-center py-8 text-gray-500">
-                    No users found
+                    Foydalanuvchilar topilmadi
                   </td>
                 </tr>
               ) : (
@@ -124,14 +124,14 @@ const UsersManagement = () => {
                       <span className={`px-3 py-1 rounded-full text-xs font-medium ${
                         user.role === 'admin' ? 'bg-purple-100 text-purple-700' : 'bg-blue-100 text-blue-700'
                       }`}>
-                        {user.role}
+                        {user.role === 'admin' ? 'Administrator' : 'Foydalanuvchi'}
                       </span>
                     </td>
                     <td className="py-4 px-4">
                       <span className={`px-3 py-1 rounded-full text-xs font-medium ${
                         user.face_embeddings?.length > 0 ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-700'
                       }`}>
-                        {user.face_embeddings?.length > 0 ? `${user.face_embeddings.length} face(s)` : 'Not registered'}
+                        {user.face_embeddings?.length > 0 ? `${user.face_embeddings.length} yuz` : 'Ro\'yxatdan o\'tmagan'}
                       </span>
                     </td>
                     <td className="py-4 px-4 text-right">
@@ -156,19 +156,19 @@ const UsersManagement = () => {
       <AlertDialog open={!!deleteUserId} onOpenChange={() => setDeleteUserId(null)}>
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+            <AlertDialogTitle>Ishonchingiz komilmi?</AlertDialogTitle>
             <AlertDialogDescription>
-              This action cannot be undone. This will permanently delete the user account.
+              Bu harakatni qaytarib bo'lmaydi. Bu foydalanuvchi hisobi butunlay o'chiriladi.
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogCancel data-testid="btn-cancel-delete">Cancel</AlertDialogCancel>
+            <AlertDialogCancel data-testid="btn-cancel-delete">Bekor Qilish</AlertDialogCancel>
             <AlertDialogAction
               data-testid="btn-confirm-delete"
               onClick={handleDeleteUser}
               className="bg-red-600 hover:bg-red-700"
             >
-              Delete
+              O'chirish
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>

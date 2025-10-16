@@ -19,7 +19,7 @@ const DashboardStats = () => {
       const response = await axios.get(`${API}/admin/dashboard`);
       setStats(response.data);
     } catch (error) {
-      toast.error('Failed to fetch dashboard stats');
+      toast.error('Panel statistikasini yuklashda xatolik');
     } finally {
       setLoading(false);
     }
@@ -35,7 +35,7 @@ const DashboardStats = () => {
 
   const chartData = stats?.weekly_stats
     ? Object.entries(stats.weekly_stats).map(([date, count]) => ({
-        date: new Date(date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' }),
+        date: new Date(date).toLocaleDateString('uz-UZ', { month: 'short', day: 'numeric' }),
         attendance: count
       }))
     : [];
@@ -47,9 +47,9 @@ const DashboardStats = () => {
         <Card className="p-6 bg-white rounded-2xl shadow-sm hover:shadow-md transition-shadow">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm text-gray-600 mb-1">Total Users</p>
+              <p className="text-sm text-gray-600 mb-1">Jami Foydalanuvchilar</p>
               <p className="text-4xl font-bold text-gray-900">{stats?.total_users || 0}</p>
-              <p className="text-sm text-gray-500 mt-1">Registered</p>
+              <p className="text-sm text-gray-500 mt-1">Ro'yxatdan O'tgan</p>
             </div>
             <div className="w-14 h-14 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-xl flex items-center justify-center">
               <Users className="w-7 h-7 text-white" />
@@ -60,9 +60,9 @@ const DashboardStats = () => {
         <Card className="p-6 bg-white rounded-2xl shadow-sm hover:shadow-md transition-shadow">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm text-gray-600 mb-1">Today Present</p>
+              <p className="text-sm text-gray-600 mb-1">Bugun Hozir</p>
               <p className="text-4xl font-bold text-gray-900">{stats?.today_present || 0}</p>
-              <p className="text-sm text-gray-500 mt-1">Attendance Marked</p>
+              <p className="text-sm text-gray-500 mt-1">Davomat Belgilandi</p>
             </div>
             <div className="w-14 h-14 bg-gradient-to-br from-green-500 to-teal-500 rounded-xl flex items-center justify-center">
               <UserCheck className="w-7 h-7 text-white" />
@@ -73,9 +73,9 @@ const DashboardStats = () => {
         <Card className="p-6 bg-white rounded-2xl shadow-sm hover:shadow-md transition-shadow">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm text-gray-600 mb-1">Today Absent</p>
+              <p className="text-sm text-gray-600 mb-1">Bugun Yo'q</p>
               <p className="text-4xl font-bold text-gray-900">{stats?.today_absent || 0}</p>
-              <p className="text-sm text-gray-500 mt-1">Not Marked</p>
+              <p className="text-sm text-gray-500 mt-1">Belgilanmagan</p>
             </div>
             <div className="w-14 h-14 bg-gradient-to-br from-orange-500 to-red-500 rounded-xl flex items-center justify-center">
               <UserX className="w-7 h-7 text-white" />
@@ -87,7 +87,7 @@ const DashboardStats = () => {
       {/* Weekly Chart */}
       <Card className="p-6 bg-white rounded-2xl shadow-sm">
         <div className="flex items-center justify-between mb-6">
-          <h3 className="text-xl font-bold text-gray-800">Weekly Attendance Trend</h3>
+          <h3 className="text-xl font-bold text-gray-800">Haftalik Davomat Tendensiyasi</h3>
           <TrendingUp className="w-5 h-5 text-indigo-600" />
         </div>
         {chartData.length > 0 ? (
@@ -114,7 +114,7 @@ const DashboardStats = () => {
           </ResponsiveContainer>
         ) : (
           <div className="text-center py-12 text-gray-500">
-            No attendance data available for the past week
+            O'tgan hafta uchun davomat ma'lumotlari mavjud emas
           </div>
         )}
       </Card>
