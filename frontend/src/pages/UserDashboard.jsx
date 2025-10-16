@@ -24,7 +24,6 @@ const UserDashboard = () => {
       const response = await axios.get(`${API}/attendance/history`);
       setAttendance(response.data);
       
-      // Calculate stats for current month
       const now = new Date();
       const monthStart = new Date(now.getFullYear(), now.getMonth(), 1);
       const monthRecords = response.data.filter(r => new Date(r.timestamp) >= monthStart);
@@ -34,7 +33,7 @@ const UserDashboard = () => {
         total: new Date().getDate()
       });
     } catch (error) {
-      toast.error('Failed to fetch attendance');
+      toast.error('Davomat ma\'lumotlarini yuklashda xatolik');
     } finally {
       setLoading(false);
     }
@@ -42,7 +41,7 @@ const UserDashboard = () => {
 
   const handleLogout = () => {
     logout();
-    toast.success('Logged out successfully');
+    toast.success('Tizimdan muvaffaqiyatli chiqdingiz');
     navigate('/');
   };
 
@@ -64,8 +63,8 @@ const UserDashboard = () => {
                 <User className="w-6 h-6 text-white" />
               </div>
               <div>
-                <h1 className="text-2xl font-bold text-gray-800">My Dashboard</h1>
-                <p className="text-sm text-gray-600">Welcome, {user?.full_name}</p>
+                <h1 className="text-2xl font-bold text-gray-800">Mening Panelim</h1>
+                <p className="text-sm text-gray-600">Xush kelibsiz, {user?.full_name}</p>
               </div>
             </div>
             <div className="flex items-center space-x-3">
@@ -75,7 +74,7 @@ const UserDashboard = () => {
                 className="bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white"
               >
                 <Camera className="w-4 h-4 mr-2" />
-                Mark Attendance
+                Davomatni Belgilash
               </Button>
               <Button
                 data-testid="btn-logout"
@@ -83,7 +82,7 @@ const UserDashboard = () => {
                 variant="outline"
               >
                 <LogOut className="w-4 h-4 mr-2" />
-                Logout
+                Chiqish
               </Button>
             </div>
           </div>
@@ -96,9 +95,9 @@ const UserDashboard = () => {
           <Card className="p-6 bg-white rounded-2xl shadow-sm hover:shadow-md transition-shadow">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-gray-600 mb-1">This Month</p>
+                <p className="text-sm text-gray-600 mb-1">Bu Oy</p>
                 <p className="text-3xl font-bold text-gray-900">{stats.present}/{stats.total}</p>
-                <p className="text-sm text-gray-500 mt-1">Days Present</p>
+                <p className="text-sm text-gray-500 mt-1">Kun Qatnashgan</p>
               </div>
               <div className="w-12 h-12 bg-gradient-to-br from-green-500 to-teal-500 rounded-xl flex items-center justify-center">
                 <Calendar className="w-6 h-6 text-white" />
@@ -109,11 +108,11 @@ const UserDashboard = () => {
           <Card className="p-6 bg-white rounded-2xl shadow-sm hover:shadow-md transition-shadow">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-gray-600 mb-1">Attendance Rate</p>
+                <p className="text-sm text-gray-600 mb-1">Davomat Foizi</p>
                 <p className="text-3xl font-bold text-gray-900">
                   {stats.total > 0 ? Math.round((stats.present / stats.total) * 100) : 0}%
                 </p>
-                <p className="text-sm text-gray-500 mt-1">This Month</p>
+                <p className="text-sm text-gray-500 mt-1">Bu Oy</p>
               </div>
               <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-indigo-500 rounded-xl flex items-center justify-center">
                 <BarChart3 className="w-6 h-6 text-white" />
@@ -124,9 +123,9 @@ const UserDashboard = () => {
           <Card className="p-6 bg-white rounded-2xl shadow-sm hover:shadow-md transition-shadow">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-gray-600 mb-1">Total Records</p>
+                <p className="text-sm text-gray-600 mb-1">Jami Yozuvlar</p>
                 <p className="text-3xl font-bold text-gray-900">{attendance.length}</p>
-                <p className="text-sm text-gray-500 mt-1">All Time</p>
+                <p className="text-sm text-gray-500 mt-1">Barcha Vaqt</p>
               </div>
               <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-500 rounded-xl flex items-center justify-center">
                 <Clock className="w-6 h-6 text-white" />
@@ -137,22 +136,22 @@ const UserDashboard = () => {
 
         {/* Attendance History */}
         <Card className="p-6 bg-white rounded-2xl shadow-sm">
-          <h2 className="text-xl font-bold text-gray-800 mb-4">Attendance History</h2>
+          <h2 className="text-xl font-bold text-gray-800 mb-4">Davomat Tarixi</h2>
           <div className="overflow-x-auto">
             <table className="w-full">
               <thead>
                 <tr className="border-b">
-                  <th className="text-left py-3 px-4 text-sm font-semibold text-gray-700">Date</th>
-                  <th className="text-left py-3 px-4 text-sm font-semibold text-gray-700">Time</th>
-                  <th className="text-left py-3 px-4 text-sm font-semibold text-gray-700">Status</th>
-                  <th className="text-left py-3 px-4 text-sm font-semibold text-gray-700">Confidence</th>
+                  <th className="text-left py-3 px-4 text-sm font-semibold text-gray-700">Sana</th>
+                  <th className="text-left py-3 px-4 text-sm font-semibold text-gray-700">Vaqt</th>
+                  <th className="text-left py-3 px-4 text-sm font-semibold text-gray-700">Holat</th>
+                  <th className="text-left py-3 px-4 text-sm font-semibold text-gray-700">Aniqlik</th>
                 </tr>
               </thead>
               <tbody>
                 {attendance.length === 0 ? (
                   <tr>
                     <td colSpan="4" className="text-center py-8 text-gray-500">
-                      No attendance records found
+                      Davomat yozuvlari topilmadi
                     </td>
                   </tr>
                 ) : (
@@ -166,7 +165,7 @@ const UserDashboard = () => {
                       </td>
                       <td className="py-3 px-4">
                         <span className="px-3 py-1 rounded-full text-xs font-medium bg-green-100 text-green-700">
-                          {record.status}
+                          {record.status === 'present' ? 'Hozir' : record.status}
                         </span>
                       </td>
                       <td className="py-3 px-4 text-sm text-gray-600">

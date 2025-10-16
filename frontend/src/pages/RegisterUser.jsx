@@ -33,10 +33,10 @@ const RegisterUser = () => {
     try {
       const response = await axios.post(`${API}/auth/register`, userData);
       setUserId(response.data.id);
-      toast.success('User registered successfully!');
+      toast.success('Foydalanuvchi muvaffaqiyatli ro\'yxatdan o\'tkazildi!');
       setStep(2);
     } catch (error) {
-      toast.error(error.response?.data?.detail || 'Registration failed');
+      toast.error(error.response?.data?.detail || 'Ro\'yxatdan o\'tish amalga oshmadi');
     } finally {
       setLoading(false);
     }
@@ -50,11 +50,11 @@ const RegisterUser = () => {
         user_id: userId,
         face_image: faceImage
       });
-      toast.success('Face registered successfully!');
+      toast.success('Yuz muvaffaqiyatli ro\'yxatdan o\'tkazildi!');
       setFaceRegistered(true);
       setTimeout(() => navigate('/admin'), 1500);
     } catch (error) {
-      toast.error(error.response?.data?.detail || 'Face registration failed');
+      toast.error(error.response?.data?.detail || 'Yuz ro\'yxatdan o\'tkazish amalga oshmadi');
     } finally {
       setLoading(false);
       setShowWebcam(false);
@@ -71,7 +71,7 @@ const RegisterUser = () => {
           className="mb-6"
         >
           <ArrowLeft className="w-4 h-4 mr-2" />
-          Back to Dashboard
+          Panelga Qaytish
         </Button>
 
         <Card className="bg-white rounded-3xl shadow-xl p-8">
@@ -79,33 +79,33 @@ const RegisterUser = () => {
             <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-indigo-600 to-purple-600 rounded-2xl mb-4">
               <User className="w-8 h-8 text-white" />
             </div>
-            <h1 className="text-3xl font-bold text-gray-900 mb-2">Register New User</h1>
-            <p className="text-gray-600">Step {step} of 2: {step === 1 ? 'User Details' : 'Face Registration'}</p>
+            <h1 className="text-3xl font-bold text-gray-900 mb-2">Yangi Foydalanuvchi Qo'shish</h1>
+            <p className="text-gray-600">Qadam {step}/2: {step === 1 ? 'Foydalanuvchi Ma\'lumotlari' : 'Yuz Ro\'yxatdan O\'tkazish'}</p>
           </div>
 
           {step === 1 ? (
             <form onSubmit={handleUserRegistration} className="space-y-4">
               <div>
-                <Label htmlFor="full_name">Full Name</Label>
+                <Label htmlFor="full_name">To'liq Ism</Label>
                 <Input
                   data-testid="input-full-name"
                   id="full_name"
                   value={userData.full_name}
                   onChange={(e) => setUserData({ ...userData, full_name: e.target.value })}
-                  placeholder="John Doe"
+                  placeholder="Alisher Navoiy"
                   required
                   className="h-12"
                 />
               </div>
 
               <div>
-                <Label htmlFor="username">Username</Label>
+                <Label htmlFor="username">Foydalanuvchi Nomi</Label>
                 <Input
                   data-testid="input-username"
                   id="username"
                   value={userData.username}
                   onChange={(e) => setUserData({ ...userData, username: e.target.value })}
-                  placeholder="johndoe"
+                  placeholder="alisher"
                   required
                   className="h-12"
                 />
@@ -119,14 +119,14 @@ const RegisterUser = () => {
                   type="email"
                   value={userData.email}
                   onChange={(e) => setUserData({ ...userData, email: e.target.value })}
-                  placeholder="john@example.com"
+                  placeholder="alisher@example.com"
                   required
                   className="h-12"
                 />
               </div>
 
               <div>
-                <Label htmlFor="password">Password</Label>
+                <Label htmlFor="password">Parol</Label>
                 <Input
                   data-testid="input-password"
                   id="password"
@@ -140,14 +140,14 @@ const RegisterUser = () => {
               </div>
 
               <div>
-                <Label htmlFor="role">Role</Label>
+                <Label htmlFor="role">Rol</Label>
                 <Select value={userData.role} onValueChange={(val) => setUserData({ ...userData, role: val })}>
                   <SelectTrigger data-testid="select-role" className="h-12">
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="user">User</SelectItem>
-                    <SelectItem value="admin">Admin</SelectItem>
+                    <SelectItem value="user">Foydalanuvchi</SelectItem>
+                    <SelectItem value="admin">Administrator</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
@@ -158,7 +158,7 @@ const RegisterUser = () => {
                 disabled={loading}
                 className="w-full h-12 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white"
               >
-                {loading ? 'Registering...' : 'Next: Register Face'}
+                {loading ? 'Ro\'yxatdan o\'tkazilmoqda...' : 'Keyingi: Yuzni Ro\'yxatdan O\'tkazish'}
               </Button>
             </form>
           ) : (
@@ -168,15 +168,15 @@ const RegisterUser = () => {
                   <div className="w-24 h-24 bg-gradient-to-br from-indigo-100 to-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
                     <Camera className="w-12 h-12 text-indigo-600" />
                   </div>
-                  <h3 className="text-xl font-semibold text-gray-800 mb-2">Register Face</h3>
-                  <p className="text-gray-600 mb-6">Capture user's face for attendance recognition</p>
+                  <h3 className="text-xl font-semibold text-gray-800 mb-2">Yuzni Ro'yxatdan O'tkazish</h3>
+                  <p className="text-gray-600 mb-6">Davomat tanish uchun foydalanuvchi yuzini suratga oling</p>
                   <div className="space-y-3">
                     <Button
                       data-testid="btn-start-face-capture"
                       onClick={() => setShowWebcam(true)}
                       className="w-full h-12 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white"
                     >
-                      Start Face Capture
+                      Yuz Suratga Olishni Boshlash
                     </Button>
                     <Button
                       data-testid="btn-skip-face"
@@ -184,7 +184,7 @@ const RegisterUser = () => {
                       variant="outline"
                       className="w-full h-12"
                     >
-                      Skip for Now
+                      Hozircha O'tkazib Yuborish
                     </Button>
                   </div>
                 </div>
@@ -195,8 +195,8 @@ const RegisterUser = () => {
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                     </svg>
                   </div>
-                  <h3 className="text-xl font-semibold text-gray-800 mb-2">Registration Complete!</h3>
-                  <p className="text-gray-600">Redirecting to dashboard...</p>
+                  <h3 className="text-xl font-semibold text-gray-800 mb-2">Ro'yxatdan O'tkazish Tugallandi!</h3>
+                  <p className="text-gray-600">Panelga yo'naltirilmoqda...</p>
                 </div>
               ) : (
                 <WebcamCapture
