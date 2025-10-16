@@ -22,7 +22,7 @@ const MarkAttendance = () => {
       setResult(response.data);
       toast.success(response.data.message);
     } catch (error) {
-      toast.error(error.response?.data?.detail || 'Attendance marking failed');
+      toast.error(error.response?.data?.detail || 'Davomatni belgilashda xatolik');
     } finally {
       setLoading(false);
       setShowWebcam(false);
@@ -44,7 +44,7 @@ const MarkAttendance = () => {
           className="mb-6"
         >
           <ArrowLeft className="w-4 h-4 mr-2" />
-          Back to Home
+          Bosh Sahifaga Qaytish
         </Button>
 
         <Card className="bg-white rounded-3xl shadow-xl p-8">
@@ -52,8 +52,8 @@ const MarkAttendance = () => {
             <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-indigo-600 to-purple-600 rounded-2xl mb-4">
               <Camera className="w-8 h-8 text-white" />
             </div>
-            <h1 className="text-3xl font-bold text-gray-900 mb-2">Mark Attendance</h1>
-            <p className="text-gray-600">Use face recognition to mark your attendance</p>
+            <h1 className="text-3xl font-bold text-gray-900 mb-2">Davomatni Belgilash</h1>
+            <p className="text-gray-600">Davomatingizni belgilash uchun yuz tanishdan foydalaning</p>
           </div>
 
           {!showWebcam && !result ? (
@@ -61,14 +61,14 @@ const MarkAttendance = () => {
               <div className="w-24 h-24 bg-gradient-to-br from-indigo-100 to-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
                 <Camera className="w-12 h-12 text-indigo-600" />
               </div>
-              <h3 className="text-xl font-semibold text-gray-800 mb-2">Ready to Mark Attendance</h3>
-              <p className="text-gray-600 mb-6">Click the button below to start face recognition</p>
+              <h3 className="text-xl font-semibold text-gray-800 mb-2">Davomatni Belgilashga Tayyor</h3>
+              <p className="text-gray-600 mb-6">Yuz tanishni boshlash uchun pastdagi tugmani bosing</p>
               <Button
                 data-testid="btn-start-attendance"
                 onClick={() => setShowWebcam(true)}
                 className="bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white px-8 h-12"
               >
-                Start Attendance Marking
+                Davomat Belgilashni Boshlash
               </Button>
             </div>
           ) : result ? (
@@ -77,7 +77,7 @@ const MarkAttendance = () => {
                 <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
                   <CheckCircle2 className="w-10 h-10 text-green-600" />
                 </div>
-                <h3 className="text-2xl font-bold text-gray-800 mb-2">Attendance Marked!</h3>
+                <h3 className="text-2xl font-bold text-gray-800 mb-2">Davomat Belgilandi!</h3>
                 <p className="text-gray-600">{result.message}</p>
               </div>
 
@@ -97,11 +97,11 @@ const MarkAttendance = () => {
                         <span className={`px-3 py-1 rounded-full text-xs font-medium ${
                           user.status === 'marked' ? 'bg-green-100 text-green-700' : 'bg-yellow-100 text-yellow-700'
                         }`}>
-                          {user.status === 'marked' ? 'Marked' : 'Already Marked Today'}
+                          {user.status === 'marked' ? 'Belgilandi' : 'Bugun Allaqachon Belgilangan'}
                         </span>
                         {user.confidence && (
                           <p className="text-sm text-gray-600 mt-1">
-                            {(user.confidence * 100).toFixed(1)}% match
+                            {(user.confidence * 100).toFixed(1)}% moslik
                           </p>
                         )}
                       </div>
@@ -116,7 +116,7 @@ const MarkAttendance = () => {
                   onClick={resetAndMarkAgain}
                   className="flex-1 h-12 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white"
                 >
-                  Mark Another
+                  Boshqasini Belgilash
                 </Button>
                 <Button
                   data-testid="btn-done"
@@ -124,7 +124,7 @@ const MarkAttendance = () => {
                   variant="outline"
                   className="flex-1 h-12"
                 >
-                  Done
+                  Tayyor
                 </Button>
               </div>
             </div>

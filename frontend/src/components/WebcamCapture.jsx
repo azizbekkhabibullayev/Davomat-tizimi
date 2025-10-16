@@ -43,7 +43,7 @@ const WebcamCapture = ({ onCapture, onClose, loading }) => {
           className="flex-1 h-12 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white"
         >
           <Camera className="w-5 h-5 mr-2" />
-          {loading ? 'Processing...' : captured ? 'Captured' : 'Capture'}
+          {loading ? 'Qayta ishlanmoqda...' : captured ? 'Suratga Olindi' : 'Suratga Olish'}
         </Button>
         <Button
           data-testid="btn-webcam-close"
@@ -57,7 +57,7 @@ const WebcamCapture = ({ onCapture, onClose, loading }) => {
       </div>
 
       <p className="text-sm text-center text-gray-600">
-        Position your face within the frame and click capture
+        Yuzingizni ramka ichiga joylashtiring va suratga oling tugmasini bosing
       </p>
     </div>
   );
